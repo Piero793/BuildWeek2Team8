@@ -43,17 +43,14 @@ function fetchPlaylistTracks() {
           col.classList.add("col-md-3");
 
           col.innerHTML = `
-             <div class="product-card bg-dark text-white h-100 p-2 rounded">
-      <img src="${track.album.cover}" class="card-img-top" alt="${track.title}">
-      <div class="product-card-body mt-2">
-        <h5 class="product-title">${track.title}</h5>
-        <p class="artist-name">Artista: ${track.artist.name}</p>
-      </div>
-    </div>
-
-
-            
-          `;
+          <div class="product-card text-white h-100 p-2 rounded">
+             <img src="${track.album.cover}" class="card-img-top" alt="${track.title}">
+             <div class="product-card-body mt-2">
+               <h5 class="product-title">${track.title}</h5>
+               <p class="artist-name">Artista: ${track.artist.name}</p>
+             </div>
+           </div>
+       `;
           row.appendChild(col);
         });
 

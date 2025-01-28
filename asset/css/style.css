@@ -3,6 +3,35 @@ body {
   color: rgb(255, 255, 255);
 }
 .playlist-item:hover {
-  color: white;
+  color: rgb(255, 255, 255);
   cursor: pointer;
+}
+.piace {
+  width: 20px;
+  height: 20px;
+}
+.nero {
+  background-color: black;
+}
+.gradiente {
+  background: rgb(120, 117, 117);
+  background: linear-gradient(20deg, rgba(120, 117, 117, 1) 40%, rgba(2, 0, 36, 1) 100%);
+}
+.product-card {
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.product-card:hover {
+  background-color: rgba(233, 233, 233, 0.926); /* Colore di sfondo scuro quando si passa con il mouse */
+}
+
+.product-card .product-title,
+.product-card .artist-name {
+  transition: color 0.1s ease;
+}
+
+.product-card:hover .product-title,
+.product-card:hover .artist-name {
+  color: #1db954; /* Colore del testo quando si passa con il mouse */
 }
