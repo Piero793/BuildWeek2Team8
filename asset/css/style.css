@@ -35,3 +35,12 @@ body {
 .product-card:hover .artist-name {
   color: #1db954; /* Colore del testo quando si passa con il mouse */
 }
+.playlist-link {
+  text-decoration: none;
+  color: inherit; /* Mantiene il colore di testo ereditato dal contesto */
+}
+
+/* Opzionale: Cambia il colore del testo al passaggio del mouse */
+.playlist-link:hover {
+  color: #007bff; /* Puoi scegliere qualsiasi colore */
+}

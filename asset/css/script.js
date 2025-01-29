@@ -1,16 +1,51 @@
-const token = "9db9d09e3amshfadb6a696215d2bp15a0a3jsna579b87fdc3a";
 const playlistId = "3155776842"; // Sostituisci con un ID playlist valido
 const carouselItems = document.getElementById("carousel-items");
 const errorMessageElement = document.getElementById("error-message");
 
-function showError(message) {
-  errorMessageElement.textContent = message;
-  errorMessageElement.classList.remove("d-none");
-  setTimeout(() => {
-    errorMessageElement.classList.add("d-none");
-  }, 5000);
+const url = "deezerdevs-deezer.p.rapidapi.com";
+const token = "e85f7e1b6amsh3a1e91a6c83fe6ep14f6a0jsn1120c9a61274";
+
+// Funzione per ottenere tutte le playlist
+function fetchAllPlaylists() {
+  const apiUrl = `https://deezerdevs-deezer.p.rapidapi.com/search?q=playlist`;
+  const options = {
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": token,
+      "x-rapidapi-host": url,
+    },
+  };
+
+  fetch(apiUrl, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Errore API: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Tutte le playlist ricevute:", data);
+      const playlistList = document.getElementById("playlist-list");
+      playlistList.innerHTML = ""; // Pulisci la lista esistente
+
+      data.data.forEach((playlist) => {
+        const playlistRow = document.createElement("div");
+        playlistRow.classList.add("col-12");
+
+        playlistRow.innerHTML = `
+          <a href="#" class="playlist-link fs-5 text-dark">${playlist.title}</a>
+        `;
+
+        playlistList.appendChild(playlistRow);
+      });
+    })
+    .catch((error) => {
+      showError("Si è verificato un errore nel caricare le playlist.");
+      console.error("Errore nella richiesta:", error);
+    });
 }
 
+// Funzione per ottenere i brani di una playlist
 function fetchPlaylistTracks() {
   fetch(`https://deezerdevs-deezer.p.rapidapi.com/playlist/${playlistId}`, {
     headers: {
@@ -64,4 +99,17 @@ function fetchPlaylistTracks() {
     });
 }
 
-fetchPlaylistTracks();
+// Funzione per mostrare errori
+function showError(message) {
+  errorMessageElement.textContent = message;
+  errorMessageElement.classList.remove("d-none");
+  setTimeout(() => {
+    errorMessageElement.classList.add("d-none");
+  }, 5000);
+}
+
+// Chiama le funzioni per ottenere playlist e brani quando la pagina viene caricata
+document.addEventListener("DOMContentLoaded", function () {
+  fetchAllPlaylists();
+  fetchPlaylistTracks();
+});
